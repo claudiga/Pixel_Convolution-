@@ -16,7 +16,6 @@ imageURL: pic
 componentDidMount(){
 	
 	  
-alert("rendered input")
 
 }
 
@@ -50,10 +49,9 @@ background: 'red'
 return(
 <div style={style}>
 
-<h1> Input image </h1>
 <br/>
 
-<img  ref="image" src={this.state.imageURL} onLoad={this._onImageChanged.bind(this)} />
+<img  crossOrigin="annonymous" ref="image" src={this.props.imageUri} onLoad={this._onImageChanged.bind(this)} />
 <canvas style={{display:'none'}}width={300} height={300} ref="inputCanvas" >
 
 </canvas>

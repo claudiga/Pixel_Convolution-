@@ -8,7 +8,7 @@ export class MainDiv extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageData: 'not render yet',
+      imageData: 'not rendered yet',
     };
 
 

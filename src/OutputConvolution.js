@@ -1,5 +1,6 @@
 import React from 'react';
 import {InputSection} from './InputSection'
+import ReactFileReader from 'react-file-reader';
 
 export class OutputConvolution extends React.Component{
 
@@ -8,6 +9,7 @@ constructor(props){
 super(props);
 this.state={
 imDD: 'hi',
+imageurl: 'https://i.imgur.com/87q7xlF.jpg',
 };
 this.getData = this.getData.bind(this);
 
@@ -18,7 +20,6 @@ this.getData = this.getData.bind(this);
 componentDidMount(){
   
 
-alert("rendered outputi" + this.state.imDD)
 
 //this.conv(this.);
 }
@@ -33,6 +34,7 @@ this.conv(val);
   
 
 _getPicMatrix(d){
+  
   var ar = d.getContext("2d").getImageData(0,0,300,300).data;
   
   var can =[];
@@ -80,7 +82,7 @@ conv(d){
   var  matrix = {tpl:0,tpm:1, tpr:0,mdl:0,mdm:0,mdr:0,btl:0,btm:-1,btr:0} 
 
      var editim = this.refs.ouputCanvas.getContext('2d').getImageData(0,0,300,300);
-
+  console.log(editim)
 var arrays = this._getPicMatrix(d);
 
 var can = arrays[0];
@@ -207,7 +209,6 @@ for( var x = 0; x < 300-1 ; x+=1){
   
   }
      
-//alert("finished")
 
 
     var unfolded = this._unfoldBack(tempcan);
@@ -219,18 +220,25 @@ for( var x = 0; x < 300-1 ; x+=1){
 
 }
 
+
+handleFiles = files => {
+  console.log(files)
+}
+
 render(){
 
 var canvasStyle = {
 height: '400px',
 width:  '400px',
-background: 'blue'
+background: 'red'
 };
 
 return(
 <div>
-
-<InputSection ref="inputS" ImD={this.getData} />
+<ReactFileReader fileTypes={[".jpg",".png"]} base64={true} multipleFiles={true} handleFiles={this.handleFiles}>
+<button className='btn'>Upload</button>
+</ReactFileReader>
+<InputSection ref="inputS" ImD={this.getData} imageUri={this.state.imageurl} />
 <canvas ref='ouputCanvas' width={300} height={300} > 
 
 
